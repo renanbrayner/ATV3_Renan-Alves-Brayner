@@ -3,6 +3,8 @@ import java.util.*;
 public class App {
 	ArrayList<User> users;
 	Scanner scan = new Scanner(System.in); // This may cause memory leak... too bad!
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_YELLOW = "\u001B[33m";
 
 	public App() {
 		this.users = new ArrayList<User>();
@@ -21,7 +23,7 @@ public class App {
 		System.out.println("3- Modificar cliente");
 		System.out.println("4- Listar clientes");
 		System.out.println("5- Sair");
-		System.out.println("Digite uma opção:");
+		System.out.println(ANSI_YELLOW + "Digite uma opção:" + ANSI_RESET);
 	
 		String option = scan.nextLine();
 		System.out.println("\n");
@@ -54,9 +56,9 @@ public class App {
 	}
 
 	public void createUser() {
-		System.out.println("Digite o nome do cliente:");
+		System.out.println(ANSI_YELLOW + "Digite o nome do cliente:" + ANSI_RESET);
 		String name = scan.nextLine();
-		System.out.println("Digite a idade do cliente:");
+		System.out.println(ANSI_YELLOW + "Digite a idade do cliente:" + ANSI_RESET);
 		String ageNumber = scan.nextLine();
 		int age = Integer.parseInt(ageNumber);
 		User newUser = new User(name, age);
@@ -67,10 +69,17 @@ public class App {
 	public void deleteUser() {
 		listUsers();
 
-		System.out.println("Escolha um cliente para deletar: ");
+		System.out.println(ANSI_YELLOW + "Escolha um cliente para deletar: " + ANSI_RESET);
 		String userIndex = scan.nextLine();
 
-		System.out.println("Tem certeza que quer deletar o cliente " + userIndex + " ? (s/n)");
+		System.out.println(
+				ANSI_YELLOW +
+				"Tem certeza que quer deletar o cliente " +
+				userIndex +
+				" ? (s/n)" +
+				ANSI_RESET
+		);
+
 		String confirmation = scan.nextLine();
 		switch(confirmation) {
 			case "Sim":
@@ -85,6 +94,9 @@ public class App {
 			case "N":
 			case "n":
 				break;
+			default:
+				System.out.println("Opção inválida, retornando ao menu principal.");
+				break;
 		}
 	}
 
@@ -92,12 +104,12 @@ public class App {
 		UserModifier modifyUser = new UserModifier() {
 			@Override
 			public void changeName(int index) {
-				System.out.println("Digite o novo nome:");
+				System.out.println(ANSI_YELLOW + "Digite o novo nome:" + ANSI_RESET);
 				String newName = scan.nextLine();
 				users.get(index).setName(newName);
 			}
 			public void changeAge(int index) {
-				System.out.println("Digite a nova idade:");
+				System.out.println(ANSI_YELLOW + "Digite a nova idade:" + ANSI_RESET);
 				String newAgeTyped = scan.nextLine();
 				int newAge = Integer.parseInt(newAgeTyped);
 				users.get(index).setAge(newAge);
@@ -105,7 +117,7 @@ public class App {
 		};
 
 		listUsers();
-		System.out.println("Escolha um cliente para editar:");
+		System.out.println(ANSI_YELLOW + "Escolha um cliente para editar:" + ANSI_RESET);
 		String costumerIndexTyped = scan.nextLine();
 		int costumerIndex = Integer.parseInt(costumerIndexTyped);
 
@@ -114,7 +126,7 @@ public class App {
 		System.out.println("2- Idade");
 		System.out.println("3- Nome e Idade");
 		System.out.println("4- Cancelar");
-		System.out.println("Digite uma opção:");
+		System.out.println(ANSI_YELLOW + "Digite uma opção:" + ANSI_RESET);
 		String option = scan.nextLine();
 		
 		switch (option) {
@@ -143,7 +155,7 @@ public class App {
 	}
 
 	public void exit() {
-		System.out.println("tem certea que deseja sair? (s/n)");
+		System.out.println(ANSI_YELLOW + "tem certea que deseja sair? (s/n)" + ANSI_RESET);
 		String confirmation = scan.nextLine();
 
 		switch(confirmation) {

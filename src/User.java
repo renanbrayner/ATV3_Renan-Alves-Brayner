@@ -1,6 +1,9 @@
 public class User {
 	public String name;
 	public int age;
+	public static final String ANSI_CYAN = "\u001B[36m";
+	public static final String ANSI_GREEN = "\u001B[32m";
+public static final String ANSI_RESET = "\u001B[0m";
 
 	public User() {
 		this.name = "Maria";
@@ -27,6 +30,6 @@ public class User {
 	}
 
 	public String toString() {
-		return "Cliente: " + this.name + " - Idade: " + this.age;
+		return ANSI_CYAN + "Cliente: " + this.name + ANSI_RESET+ " - " + ANSI_GREEN + "Idade: " + this.age + ANSI_RESET;
 	}
 }
